@@ -68,28 +68,15 @@ def embed_text(image_path, text):
             binary_string = convert_int_to_binary(pixel[0]) # 93 -> 101101011 (int to binary)
             new_string = binary_string[:-1] + new_binary[0]
             decimal_value = int(new_string, 2) #convert changed number
-            pixel[0] = decimal_value #embed
+            pixel[0] = 255 #embed
+            pixel[1] = 0  # embed
+            pixel[2] = 0  # embed
             new_binary = new_binary[1:]
 
             if(len(new_binary) == 0):
                 break
         if (len(new_binary) == 0):
             break
-
-
-    for i in range(int(len(new_binary)/width)+1):
-        for j in range(width):
-            binary_string = convert_int_to_binary(image[i][j][0])
-            print("old string:",image[i][j][0])
-            new_string = binary_string[:-1] + new_binary[0]
-            decimal_value = int(new_string, 2)
-            print("new string:",decimal_value)
-            new_binary = new_binary[1:]
-            if(len(new_binary)==0):
-                print("break")
-                break
-            print("-" * 40)
-
 
 
 
