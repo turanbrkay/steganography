@@ -51,7 +51,7 @@ def process(image_path, text):
     width, height, channels = image.shape
 
     print(image[0])
-    print("-"*50)
+    print("-"*40)
 
 
     binary_text = convert_ASCII_to_binary(text)
