@@ -17,4 +17,18 @@ This tool embeds a text message into an image by altering the least significant 
 To perform the embedding process, you can use the following command:
 
 ```bash
-python steganography.py embed image.jpg "Hello, this is a secret message!"
+python encode.py image.jpg "Hello, this is a secret message!"
+```
+
+In this command, the first argument specifies the image file, and the second argument represents the secret message that you want to hide within the image.
+At the end of this command, a new image named 'new_image.png' will be created, and your text will be concealed within this image.
+
+### Decoding
+
+To perform the extraction process, use the following command:
+
+```bash
+python decode.py new_image.png
+```
+
+The command line takes one argument: the image from which the hidden message will be extracted.
