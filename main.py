@@ -50,17 +50,40 @@ def convert_binary_to_ASCII(text):
 def save_embedded_image(image,image_path):
     new_image = Image.fromarray(image.astype(np.uint8))
     new_image.save(image_path+".png")
+def solve_puzzle(image_path):
+    image = get_image(image_path)
+    height,width, channels = image.shape
 
+    number_of_letter = 0
+    string = ''.join(convert_int_to_binary(image[0][j][0])[7] for j in range(11))
+    length_of_text = int(string, 2)
+    text = ""
+    print("-"*50)
+    for row in range(height):
+        for column in range(width):
+            if column < 11 and row == 0:
+                continue
+            text += convert_int_to_binary(image[row][column][0])[7]
+            print(image[row][column])
+            length_of_text -= 1
+            if length_of_text == 0:
+                break
+
+        if length_of_text == 0:
+            break
+
+
+    print(convert_binary_to_ASCII(text))
 def embed_text(image_path, text):
     image = get_image(image_path)
     height,width, channels = image.shape
 
     binary_text = convert_ASCII_to_binary(text)
-
     length_of_text = format(len(binary_text), '011b')
     # append length of binary to beginning of binary_text
     new_binary = length_of_text + binary_text
-    print("Number of turn height: " ,int(len(new_binary)/width)+1)
+    print(binary_text)
+
 
     for i, row in enumerate(image):
         for j, pixel in enumerate(row):
@@ -68,17 +91,13 @@ def embed_text(image_path, text):
             binary_string = convert_int_to_binary(pixel[0]) # 93 -> 101101011 (int to binary)
             new_string = binary_string[:-1] + new_binary[0]
             decimal_value = int(new_string, 2) #convert changed number
-            pixel[0] = 255 #embed
-            pixel[1] = 0  # embed
-            pixel[2] = 0  # embed
+            pixel[0] = decimal_value
             new_binary = new_binary[1:]
 
             if(len(new_binary) == 0):
                 break
         if (len(new_binary) == 0):
             break
-
-
 
 
     print("-" * 40)
@@ -89,6 +108,6 @@ def embed_text(image_path, text):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     string = "Torres"
-    string2 = "0b10001100110010101110010011011100110000101101110011001000110111100100000010101000110111101110010011100100110010101110011"
     embed_text("small.jpg", "Fernando Torres")
+    solve_puzzle("new_image.png")
 
