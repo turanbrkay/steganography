@@ -8,7 +8,7 @@ Steganography is a technique used to secretly transmit information. This techniq
 
 ## How Does It Work?
 
-This tool embeds a text message into an image by altering specific pixels and then allows you to extract that message using the same program. The first 10 pixels indicate whether the image contains an encrypted message. The next 11 pixels specify the length of the embedded text.
+This tool embeds a text message into an image by altering the least significant bit (LSB) of each pixel. The least significant bit is the binary digit at the end of the binary representation of each pixel's intensity value. By changing this bit, the tool can hide a message within the image without causing any noticeable changes to the naked eye.
 
 ## Usage
 
